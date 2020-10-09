@@ -1,0 +1,32 @@
+﻿<Window x:Class="CanConsteel.LogIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CanConsteel"
+        xmlns:MTD="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="Login" Height="180" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        FocusManager.FocusedElement="{Binding ElementName=PasswordBox}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Content="{DynamicResource Password}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"></Label>
+        <PasswordBox x:Name="PasswordBox" Grid.Column="1" Width="200" Height="30" FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}" HorizontalAlignment="Center" VerticalContentAlignment="Center" KeyDown="PasswordBox_KeyDown"/>
+        <Button Grid.Row="1" Margin="40,0,40,0" Click="Button_Click" Background="LightGray" Foreground="Black">OK</Button>
+        <Button Grid.Column="1" Grid.Row="1" Margin="40,0,40,0" Click="Button_Click_1" Background="LightGray" Foreground="Black">CANCEL</Button>
+    </Grid>
+</Window>

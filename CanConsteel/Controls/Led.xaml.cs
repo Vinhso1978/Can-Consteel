@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace CanConsteel.Controls
+{
+    /// <summary>
+    /// Interaction logic for Led.xaml
+    /// </summary>
+    public partial class Led : UserControl
+    {
+        public Led()
+        {
+            InitializeComponent();
+        }
+
+        public bool LedColor
+        {
+            get { return (bool)GetValue(LedColorProperty); }
+            set
+            {
+                SetValue(LedColorProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty LedColorProperty = DependencyProperty.Register("LedColor", typeof(bool), typeof(Led), new PropertyMetadata());
+    }
+}

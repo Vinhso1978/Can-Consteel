@@ -1,0 +1,131 @@
+﻿<Window x:Class="CanConsteel.Views.DataSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CanConsteel.Views"
+        xmlns:MTD="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d" 
+        Title="Settings" Height="505" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <MTD:Card Grid.RowSpan="5" VerticalAlignment="Stretch"/>
+        <Grid Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{DynamicResource ResourceKey= Settings}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Button Grid.Column="1" Content="{MTD:PackIcon Kind=WindowClose, Size=16}" Padding="3" Margin="5" VerticalAlignment="Center" Click="Button_Click"/>
+        </Grid>
+        
+        <MTD:Card Grid.Row="1" Margin="5" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="{DynamicResource ResourceKey= ChangePass}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <Grid Grid.Row="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="{DynamicResource ResourceKey=NewPass}" VerticalAlignment="Center" />
+                    <Label Content="{DynamicResource ResourceKey=ComfirmPass}" Grid.Row="1" VerticalAlignment="Center"/>
+                    <PasswordBox Grid.Column="1" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,5" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <ei:CallMethodAction TargetObject="{Binding}" MethodName="changePassword"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
+                    <PasswordBox Grid.Column="1" Grid.Row="1" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,5">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <ei:CallMethodAction TargetObject="{Binding}" MethodName="changePassword2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
+                </Grid>
+                <Button Grid.Row="2" Grid.ColumnSpan="2" Width="100" Margin="10" Content="{DynamicResource ResourceKey=OK}" Command="{Binding SetPassCommand}" HorizontalAlignment="Center"/>
+            </Grid>
+        </MTD:Card>
+
+        <MTD:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+            <StackPanel>
+                <Label Content="{DynamicResource ResourceKey=Backup}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <CheckBox Content="{DynamicResource ResourceKey=AutoBackup}" IsChecked="{Binding AutoBackup}"  Command="{Binding AutoBackupChanged}" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <i:InvokeCommandAction Command="{Binding CheckedCommand}"/>
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="Unchecked">
+                            <i:InvokeCommandAction Command="{Binding UnCheckedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </CheckBox>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="135*"/>
+                        <ColumnDefinition Width="118*"/>
+                        <ColumnDefinition Width="253*"/>
+                        <ColumnDefinition Width="84*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{DynamicResource ResourceKey= PathBackup}" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,10,0,9"/>
+                    <TextBox Grid.Column="2" Text="{Binding BackupPath}" Margin="10"/>
+                    <Button Grid.Column="3" Margin="21,12,21,13" Height="20" Content="..." HorizontalAlignment="Center" Command="{Binding SelectBackup}"/>
+                </Grid>
+                <Button Width="100" Content="{DynamicResource ResourceKey=Backup}" Margin="10" Command="{Binding BackupCommand}"/>
+
+            </StackPanel>
+        </MTD:Card>
+        
+        <MTD:Card Margin="5,0,5,5" Grid.Row="3" VerticalAlignment="Stretch">
+            <StackPanel>
+                <Label Content="{DynamicResource ResourceKey=Restore}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{DynamicResource ResourceKey=FiletoRestore}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1" Text="{Binding RestoreFile}" Margin="10"/>
+                    <Button Grid.Column="2" Margin="5" Height="20" Content="..." HorizontalAlignment="Center" Command="{Binding SelectFile}"/>
+                </Grid>
+                <Button Width="100" Content="{DynamicResource ResourceKey=Restore}" Margin="10" Command="{Binding RestoreCommand}"/>
+            </StackPanel>
+        </MTD:Card>
+        
+        <MTD:Card Grid.Row="4" Margin="5,0,5,5">
+            <Grid>
+                <ProgressBar Height="15" Value="{Binding Complete}" Foreground="Lime" Background="Transparent"/>
+            </Grid>
+        </MTD:Card>
+    </Grid>
+</Window>

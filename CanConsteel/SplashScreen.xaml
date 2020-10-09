@@ -1,0 +1,32 @@
+﻿<Window x:Class="CanConsteel.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CanConsteel"
+        mc:Ignorable="d"
+        Height="300" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2" Source="Splash.jpg" Stretch="Fill" Opacity="0.7"/>
+        <TextBlock Text ="CHƯƠNG TRÌNH GIÁM SÁT HỆ THỐNG CÂN PHẾ LIỆU" FontSize="18" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Blue" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+                <TextBlock Text="CÔNG TY CỔ PHẦN KỸ THUẬT ĐIỆN TỰ ĐỘNG HÓA" FontSize="12" FontWeight="Bold" Foreground="Blue" Margin="0,5"/>
+                <TextBlock Text="ĐỊA CHỈ: SỐ 6 VŨ NGỌC PHAN - ĐỐNG ĐA - HÀ NỘI" FontSize="12" FontWeight="Bold" Foreground="Blue" Margin="0,0,0,5"/>
+                <TextBlock Text="ĐIỆN THOẠI: 0912-286-819" FontSize="12" FontWeight="Bold" Foreground="Blue"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

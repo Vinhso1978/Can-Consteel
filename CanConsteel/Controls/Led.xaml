@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="CanConsteel.Controls.Led"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CanConsteel.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <UserControl.Resources>
+        <local:Bool2Color x:Key="Bool2Color"/>
+    </UserControl.Resources>
+    <Viewbox Stretch="Fill">
+        <Canvas Height="100" Width="100">
+            <Ellipse Canvas.Left="0" Canvas.Top="0" Height="100" Width="100">
+                <Ellipse.Fill>
+                    <LinearGradientBrush StartPoint="0.5,1" EndPoint="1,0" >
+                        <GradientStop Color="#FF3D4144" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Canvas.Left="7.25" Canvas.Top="7.25" Height="85" Width="85">
+                <Ellipse.Fill>
+                    <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,1" >
+                        <GradientStop Color="#FF3D4144" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Canvas.Left="12.25" Canvas.Top="12.25" Height="75" Width="75">
+                <Ellipse.Fill>
+                    <RadialGradientBrush Center="0.6,0.35" GradientOrigin="0.6,0.35" RadiusX="0.67" RadiusY="0.67">
+                        <GradientStop Color="White" Offset="0"/>
+                        <GradientStop Color="{Binding LedColor, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource Bool2Color}}" Offset="0.8"/>
+                        <!--<GradientStop Color="Gray" Offset="0"/>
+                        <GradientStop Color="#FF6C2323" Offset="0.8"/>-->
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Canvas>
+
+    </Viewbox>
+</UserControl>

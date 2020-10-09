@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="CanConsteel.Views.Alarm"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:CanConsteel.Views"
+             xmlns:Model="clr-namespace:CanConsteel.Models"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:MTD="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"        
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             mc:Ignorable="d" 
+             x:Name="AlarmView"
+             d:DesignHeight="850" d:DesignWidth="1900">
+    <UserControl.Resources>
+        <Model:AlarmStateConverter x:Key="AlarmStateConverter"/>
+        <Style x:Key="CellStyle" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border Padding="20">
+                            <ContentPresenter HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            
+        </Style>
+        <Style x:Key="CenterCell" TargetType="{x:Type TextBlock}" >
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            
+        </Style>
+        
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <MTD:Card VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <MTD:Card VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Alarms}" 
+                  SelectedItem="{Binding SelectedAlarm, Mode =OneWayToSource}" 
+                  VerticalScrollBarVisibility="Auto" CanUserAddRows="False"
+                  SelectionMode="Single"
+                  Margin="10"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  ColumnWidth="*"
+                  Background="Transparent">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridCell"></Style>
+                    </DataGrid.Resources>
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource No}" Binding="{Binding Id}" Width="2*"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource ErrCode}" Binding="{Binding code}" Width="2*"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource Occur}" Binding="{Binding OccurTime, StringFormat=dd/MM/yyyy H:mm:ss}" Width="6*"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource ackTime}" Binding="{Binding AckTime, StringFormat=dd/MM/yyyy H:mm:ss}"  Width="6*"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource resetTime}" Binding="{Binding ResetTime, StringFormat=dd/MM/yyyy H:mm:ss}"  Width="6*"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource ErrDes}" Binding="{Binding Description}"  Width="10*"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </MTD:Card>
+            
+            <MTD:Card Grid.Column="1" Margin="10" VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Content="{DynamicResource Ack }" Command="{Binding AckCommand}" Width="150" IsEnabled="{Binding EnableAck}"/>
+                    <Button Grid.Row="1" Content="{DynamicResource Reset }" Command="{Binding ResetCommand}" Width="150"/>
+                    <!--<Button Grid.Row="2" Content="{DynamicResource ResetAll }" Command="{Binding ResetAllCommand}" Width="150"/>-->
+                    <Button Grid.Row="3" Content="{DynamicResource Clear }" Command="{Binding ClearCommand}" Width="150"/>
+                </Grid>
+            </MTD:Card>
+        </Grid>
+        
+    </MTD:Card>
+</UserControl>
